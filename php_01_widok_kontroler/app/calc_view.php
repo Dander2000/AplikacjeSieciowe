@@ -5,7 +5,7 @@
 		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Kalkulator</title>
-		<link rel="stylesheet" href="../css/style.css">
+		<link rel="stylesheet" href="<?php print(_APP_URL);?>/css/style.css">
 	</head>
 	<body>
 		<header>
@@ -13,25 +13,31 @@
 		</header>
 		<main>
 			<form action="<?php print(_APP_URL);?>/app/calc.php" method="post">
-				<label for="id_s">Kwota: </label>
-				<input id="id_s" type="number" name="sum" value="<?php print($s??0); ?>" /><br />
-				<label for="id_y">Liczba lat kredytu: </label>
-				<input id="id_y" type="number" name="years" value="<?php print($y??0); ?>" /><br />
-				<label for="id_i">Oprocentowanie: </label>
-				<input id="id_i" type="number" name="interest" value="<?php print($i??0); ?>" /><br />
-				<input type="submit" value="Oblicz" />
+				<label>Kwota kredytu: 
+				<input min="0" type="number" name="sum" value="<?php print($s??0); ?>" style="width: 9em"/>
+				PLN</label><br />
+				<label>Liczba lat kredytu: 
+				<input id="id_y" min="0" type="number" name="years" value="<?php print($y??0); ?>"  style="width: 6em"/>
+				</label><br />
+				<label>Oprocentowanie: 
+				<input id="id_i" min="0" type="number" name="interest" value="<?php print($i??0); ?>" style="width: 6em"/>
+				%</label><br />
+				<input type="submit" value="Oblicz" style="width: 10em" />
 			</form>
 			<?php
 			//wyświeltenie listy błędów, jeśli istnieją
 			if (isset($messages)) {
 				if (count ( $messages ) > 0) {?>
-					<div class="err">
+					<div class="result err">
 						<h4>Ponownie wypełnij formularz</h4>
-						<?php 
-					foreach ( $messages as $key => $msg ) {
-						echo '<h5>'.$msg.'</h5>';
-					}
-					?>
+						<img src="https://i.kym-cdn.com/photos/images/facebook/002/122/044/045.jpg" width="220px"/>
+						<ul>
+							<?php 
+						foreach ( $messages as $key => $msg ) {
+							echo '<li>'.$msg.'</li>';
+						}
+						?>
+						</ul>
 					</div>
 			<?php
 				}
@@ -39,7 +45,7 @@
 			//wyświetlanie wyniku
 			if (isset($result)){ ?>
 				<div class="result">
-					<?php echo 'Rata kredytu: '.$result; ?>
+					<?php echo 'Rata kredytu: '.round($result,2).' PLN'?>
 				</div>
 				<?php 
 			} 
