@@ -1,0 +1,99 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+}
+
+body{
+    text-align: center;
+    background: linear-gradient(0, rgb(50,50,50), #222 10%);
+    min-height: 100vh;
+}
+
+header{
+    padding-top: calc(10vh - 3em);
+    height: 15vh;
+    font-size: x-large;
+    /* background: linear-gradient(0,#0d0 ,#222 90%); */
+    background: linear-gradient(0, #0d0 0, #222 20%, #222 80%, #0d0 100%);
+    text-shadow: -.2em -.2em 1em #0d0,
+        -.2em .2em 1em #0d0,
+        .2em .2em 1em #0d0,
+        .2em -.2em 1em #0d0;
+    
+}
+
+main{
+    min-width: fit-content;
+    background-color: rgb(50, 50, 50);
+    width: 70vw;
+    min-height: 60vh;
+    margin: 3em auto 3em auto;
+    padding: 2em;
+    border-color: #0f0;
+    border-style: solid;
+    border-width: .3em;
+    border-radius: 15px;
+    box-shadow: -.1em -.1em .5em #0d0,
+        -.1em .1em .5em #0d0,
+        .1em .1em .5em #0d0,
+        .1em -.1em .5em #0d0;
+
+}
+
+input{
+    background-color: #222;
+    padding: 1em;
+    margin: .5em;
+    border-color: #0f0;
+    border-style: solid;
+    border-width: .2em;
+    border-radius: 15px;
+}
+
+input:hover{
+    padding: 1em;
+    margin: .5em;
+    border-color: #0f0;
+    border-style: solid;
+    border-width: .2em;
+    border-radius: 15px;
+    box-shadow: -.1em -.1em .5em #0d0,
+        -.1em .1em .5em #0d0,
+        .1em .1em .5em #0d0,
+        .1em -.1em .5em #0d0;
+}
+
+h1,h2,h3,h4,h5,h6{
+    margin: .5em auto .5em auto;
+}
+
+
+.result{
+    width: fit-content;
+    padding: 1.5em 2em 1.5em 2em;
+    margin: 2em auto auto auto;
+    background-color: #222;
+    border-color: #0f0;
+    border-style: solid;
+    border-width: .1em;
+    border-radius: 15px;
+    box-shadow: -.1em -.1em .5em #0d0,
+    -.1em .1em .5em #0d0,
+    .1em .1em .5em #0d0,
+    .1em -.1em .5em #0d0;
+}
+
+.err{
+    border-color: #f00;
+    box-shadow: -.1em -.1em .5em #d00,
+        -.1em .1em .5em #d00,
+        .1em .1em .5em #d00,
+        .1em -.1em .5em #d00;
+}
+
+ul{
+    text-align: left;
+}
