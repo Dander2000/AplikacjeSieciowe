@@ -5,7 +5,7 @@
 		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Kalkulator</title>
-		<link rel="stylesheet" href="<?php print(_APP_URL);?>/css/style.css">
+		<link rel="stylesheet" href="<?php print(_APP_URL);?>/../css/style.css">
 	</head>
 	<body>
 		<header>
@@ -33,10 +33,10 @@
 						<img src="https://i.kym-cdn.com/photos/images/facebook/002/122/044/045.jpg" width="220px"/>
 						<ul>
 							<?php 
-						foreach ( $messages as $key => $msg ) {
-							echo '<li>'.$msg.'</li>';
-						}
-						?>
+							foreach ( $messages as $key => $msg ) {
+								echo '<li>'.$msg.'</li>';
+							}
+							?>
 						</ul>
 					</div>
 			<?php
