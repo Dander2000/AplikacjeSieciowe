@@ -1,0 +1,67 @@
+{extends file="../tpl/main.html"}
+
+{block name=header}
+
+	<h1>{$header}</h1>
+
+{/block}
+
+{block name=nav}
+
+	<nav>
+		<a href="{_APP_ROOT}/app/calc.php">
+			<button>
+				Kalkulator kredytowy
+			</button>
+		</a>
+	</nav>
+
+{/block}
+
+{block name=content}
+
+	<form action="{$app_url}/app/calc.php" method="post">
+		<label>Kwota kredytu:
+			<input min="0" type="number" name="sum" value="{$form['s']|default:0}" style="width: 9em" />PLN
+		</label><br />
+		<label>Liczba lat kredytu:
+			<input id="id_y" min="0" type="number" name="years" value="{$form['y']|default:0}" style="width: 6em" />
+		</label><br />
+		<label>Oprocentowanie:
+			<input id="id_i" min="0" type="number" name="interest" value="{$form['i']|default:0}" style="width: 6em" />%
+		</label><br />
+		<input type="submit" value="Oblicz" style="width: 10em" />
+	</form>
+
+	{* wyświeltenie listy błędów, jeśli istnieją *}
+	{if isset($messages)}
+		{if count($messages) > 0} 
+		<div class="result err">
+			<h4>Ponownie wypełnij formularz</h4>
+			<img src="https://i.kym-cdn.com/photos/images/facebook/002/122/044/045.jpg" width="220px" />
+			<ul>
+				{foreach  $messages as $msg}
+					{strip}
+						<li>{$msg}</li>
+					{/strip}
+				{/foreach}
+			</ul>
+		{/if}
+	{/if}
+
+	{if isset($result)}
+		<div class="result">
+			Rata kredytu: {$result} PLN
+	{/if}
+
+		</div>
+
+{/block}
+
+{block name=footer}
+
+	<h5>
+		{$footer}
+	</h5>
+
+{/block}
