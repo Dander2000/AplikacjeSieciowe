@@ -56,7 +56,7 @@ function process(&$form,&$result){
 	$form['i'] = intval($form['i']);
 	
 	//wykonanie operacji
-	$result = ($form['s'] * (($form['i']/100)/12) * ((1+(($form['i']/100)/12))**($form['y']*12)))/((((1+($form['i']/12/100))**($form['y']*12)))-1);
+	$result = round(($form['s'] * (($form['i']/100)/12) * ((1+(($form['i']/100)/12))**($form['y']*12)))/((((1+($form['i']/12/100))**($form['y']*12)))-1),2);
 	
 }
 
