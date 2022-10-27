@@ -31,9 +31,9 @@ class CalcCtrl {
 	 * Pobranie parametrów
 	 */
 	public function getParams(){
-		$this->form->s = isset($_REQUEST ['s']) ? $_REQUEST ['s'] : null;
-		$this->form->y = isset($_REQUEST ['y']) ? $_REQUEST ['y'] : null;
-		$this->form->i = isset($_REQUEST ['i']) ? $_REQUEST ['i'] : null;
+		$this->form->s = isset($_REQUEST ['sum']) ? $_REQUEST ['sum'] : null;
+		$this->form->y = isset($_REQUEST ['years']) ? $_REQUEST ['years'] : null;
+		$this->form->i = isset($_REQUEST ['interest']) ? $_REQUEST ['interest'] : null;
 	}
 	
 	/** 
@@ -49,13 +49,13 @@ class CalcCtrl {
 		
 		// sprawdzenie, czy potrzebne wartości zostały przekazane
 		if ($this->form->s == "") {
-			$this->msgs->addError('Nie podano liczby 1');
+			$this->msgs->addError('Nie podano kwoty');
 		}
 		if ($this->form->y == "") {
-			$this->msgs->addError('Nie podano liczby 2');
+			$this->msgs->addError('Nie podano liczby lat kredytu');
 		}
 		if ($this->form->i == "") {
-			$this->msgs->addError('Nie podano liczby 3');
+			$this->msgs->addError('Nie podano oprocentowania');
 		}
 		
 		// nie ma sensu walidować dalej gdy brak parametrów
@@ -63,16 +63,28 @@ class CalcCtrl {
 			
 			// sprawdzenie, czy $x i $y są liczbami całkowitymi
 			if (! is_numeric ( $this->form->s )) {
-				$this->msgs->addError('Pierwsza wartość nie jest liczbą całkowitą');
+				$this->msgs->addError('Kwota nie jest liczbą całkowitą');
 			}
 			
 			if (! is_numeric ( $this->form->y )) {
-				$this->msgs->addError('Druga wartość nie jest liczbą całkowitą');
+				$this->msgs->addError('Liczba lat kredytu nie jest liczbą całkowitą');
 			}
 
 			if (! is_numeric ( $this->form->i )) {
-				$this->msgs->addError('Druga wartość nie jest liczbą całkowitą');
+				$this->msgs->addError('Oprocentowanie nie jest liczbą całkowitą');
 			}
+
+			if ( $this->form->s <= 0 ){
+				$this->msgs->addError('Kwota nie może być liczbą ujemną ani zerem');
+			} 
+			
+			if ( $this->form->y <= 0 ){
+				$this->msgs->addError('Liczba lat kredytu nie może być liczbą ujemną ani zerem');
+			} 
+
+			if ( $this->form->i <= 0 ){
+				$this->msgs->addError('Oprocentowanie nie może być liczbą ujemną ani zerem');
+			} 
 		}
 		
 		return ! $this->msgs->isError();
@@ -88,13 +100,13 @@ class CalcCtrl {
 		if ($this->validate()) {
 				
 			//konwersja parametrów na int
-			$this->form->x = intval($this->form->x);
+			$this->form->s = intval($this->form->s);
 			$this->form->y = intval($this->form->y);
 			$this->form->i = intval($this->form->i);
 			// $this->msgs->addInfo('Parametry poprawne.');
 				
 			//wykonanie operacji
-			$this->result->result;
+			$this->result->result =  round(($this->form->s * (($this->form->i/100)/12) * ((1+(($this->form->i/100)/12))**($this->form->y *12)))/((((1+($this->form->i/12/100))**($this->form->y *12)))-1),2);
 			// $this->msgs->addInfo('Wykonano obliczenia.');
 		}
 		
