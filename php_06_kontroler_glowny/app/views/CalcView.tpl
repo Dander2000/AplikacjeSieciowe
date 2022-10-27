@@ -9,7 +9,7 @@
 {block name=nav}
 
 	<nav>
-		<a href="{$conf->app_root}/ctrl.php">
+		<a href="{$conf->app_root}">
 			<button>
 				Kalkulator kredytowy
 			</button>
