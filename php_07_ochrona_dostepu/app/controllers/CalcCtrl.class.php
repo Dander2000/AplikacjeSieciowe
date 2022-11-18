@@ -2,10 +2,10 @@
 // W skrypcie definicji kontrolera nie trzeba dołączać problematycznego skryptu config.php,
 // ponieważ będzie on użyty w miejscach, gdzie config.php zostanie już wywołany.
 
-// require_once $conf->root_path.'/lib/smarty/Smarty.class.php';
-// require_once $conf->root_path.'/core/Messages.class.php';
-// require_once $conf->root_path.'/app/controlers/CalcForm.class.php';
-// require_once $conf->root_path.'/app/controlers/CalcResult.class.php';
+// Zarejestrowany autoloader klas załaduje odpowiedni plik automatycznie w momencie, gdy skrypt będzie go chciał użyć.
+// Jeśli nie wskaże się klasy za pomocą 'use', to PHP będzie zakładać, iż klasa znajduje się w bieżącej
+// przestrzeni nazw - tutaj jest to przestrzeń 'app\controllers'.
+
 
 /** Kontroler kalkulatora
  * @author Daniel Śliwa
@@ -98,7 +98,7 @@ class CalcCtrl {
 	/** 
 	 * Pobranie wartości, walidacja, obliczenie i wyświetlenie
 	 */
-	public function process(){
+	public function calcCompute(){
 
 		$this->getParams();
 		
@@ -117,15 +117,18 @@ class CalcCtrl {
 		$this->generateView();
 	}
 	
+	public function calcShow(){
+		$this->generateView();
+	}
 	
 	/**
 	 * Wygenerowanie widoku
 	 */
 	public function generateView(){
-		global $user;
+		// global $user;
 		//nie trzeba już tworzyć Smarty i przekazywać mu konfiguracji i messages
 		// - wszystko załatwia funkcja getSmarty()
-		getSmarty()->assign('user',$user);
+		getSmarty()->assign('user',unserialize($_SESSION['user']));
 				
 		getSmarty()->assign('title','Kalkulator');
 		getSmarty()->assign('page_description','Aplikacja z jednym "punktem wejścia". Model MVC, w którym jeden główny kontroler używa różnych obiektów kontrolerów w zależności od wybranej akcji - przekazanej parametrem.');

@@ -14,7 +14,7 @@
 				Kalkulator kredytowy
 			</button>
 		</a>
-		<a href="{$conf->action_url}logout">
+		<a href="{$conf->action_url}doLogout">
 			<button>
 				Wyloguj
 			</button>

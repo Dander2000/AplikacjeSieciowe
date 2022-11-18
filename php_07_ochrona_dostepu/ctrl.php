@@ -10,24 +10,39 @@ require_once 'init.php';
 
 // Dodatkowo zmieniono organizację kontrolerów i widoków. Teraz wszystkie są w odpowiednio nazwanych folderach w app
 
-switch ($action) {
-	default : // 'calcView'
-		include 'check.php'; // KONTROLA
-		$ctrl = new app\controllers\CalcCtrl();
-		$ctrl->generateView ();
-	break;
-	case 'calcCompute' : // akcja NIEPUBLICZNA
-		include 'check.php';
-		$ctrl = new app\controllers\CalcCtrl();
-		$ctrl->process ();
-	break;
-	case 'login': // akcja PUBLICZNA - brak check.php
-		$ctrl = new app\controllers\LoginCtrl();
-		$ctrl->doLogin();
-	break;
-	case 'logout' : // akcja NIEPUBLICZNA
-		include 'check.php';  // KONTROLA
-		$ctrl = new app\controllers\LoginCtrl();
-		$ctrl->doLogout();
-	break;
-}
+// getConf()->login_action = 'login'; //określenie akcji logowania - robimy to w tym miejscu, ponieważ tu są zdefiniowane wszystkie akcje
+
+// switch ($action) {
+// 	default : // 'calcView'
+// 		// include 'check.php'; // KONTROLA
+// 		// $ctrl = new app\controllers\CalcCtrl();
+// 		// $ctrl->generateView ();
+// 		control( 'app\\controllers', 'CalcCtrl', 'generateView', ['user','admin']);
+// 		break;
+// 	case 'calcCompute' : // akcja NIEPUBLICZNA
+// 		// include 'check.php';
+// 		// $ctrl = new app\controllers\CalcCtrl();
+// 		// $ctrl->process ();
+// 		control( null, 'CalcCtrl','process', ['user','admin']);
+// 		break;
+// 	case 'login': // akcja PUBLICZNA - brak check.php
+// 		// $ctrl = new app\controllers\LoginCtrl();
+// 		// $ctrl->doLogin();
+// 		control( 'app\\controllers', 'LoginCtrl', 'doLogin', null);
+// 		break;
+// 	case 'logout' : // akcja NIEPUBLICZNA
+// 		// include 'check.php';  // KONTROLA
+// 		// $ctrl = new app\controllers\LoginCtrl();
+// 		// $ctrl->doLogout();
+// 		control( null, 'LoginCtrl',	'doLogout',	['user','admin']);
+// 		break;
+// }
+getRouter()->setDefaultRoute('calcShow'); // akcja/ścieżka domyślna
+getRouter()->setLoginRoute('doLogin'); // akcja/ścieżka na potrzeby logowania (przekierowanie, gdy nie ma dostępu)
+
+getRouter()->addRoute('calcShow', 'CalcCtrl',  ['user','admin']);
+getRouter()->addRoute('calcCompute', 'CalcCtrl',  ['user','admin']);
+getRouter()->addRoute('doLogin', 'LoginCtrl', null);
+getRouter()->addRoute('doLogout', 'LoginCtrl', ['user','admin']);
+
+getRouter()->go();

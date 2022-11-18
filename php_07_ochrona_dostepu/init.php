@@ -7,7 +7,7 @@ require_once './config.php'; //ustaw konfigurację
 function &getConf(){ global $conf; return $conf; }
 
 //załaduj definicję klasy Messages i stwórz obiekt
-require_once getConf()->root_path.'/core/Messages.class.php';
+require_once './core/Messages.class.php';
 $msgs = new core\Messages();
 
 function &getMessages(){ global $msgs; return $msgs; }
@@ -31,12 +31,24 @@ function &getSmarty(){
 	return $smarty;
 }
 
-require_once 'core/ClassLoader.class.php'; //załaduj i stwórz loader klas
+require_once './core/ClassLoader.class.php'; //załaduj i stwórz loader klas
 $cloader = new core\ClassLoader();
 function &getLoader() {
     global $cloader;
     return $cloader;
 }
 
-$action = isset($_REQUEST['action']) ? $_REQUEST['action'] : '';
+require_once 'core/Router.class.php'; //załaduj i stwórz router
+$router = new core\Router();
+function &getRouter(): core\Router {
+    global $router; return $router;
+}
+
+require_once 'core/functions.php';
+
+session_start(); //uruchom lub kontynuuj sesję
+$conf->roles = isset($_SESSION['_roles']) ? unserialize($_SESSION['_roles']) : array(); //wczytaj role
+
+// $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : '';
+$router->setAction( getFromRequest('action') );
 ?>

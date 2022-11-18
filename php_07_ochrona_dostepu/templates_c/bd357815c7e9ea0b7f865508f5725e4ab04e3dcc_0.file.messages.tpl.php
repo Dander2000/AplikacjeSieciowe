@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 3.1.30, created on 2022-10-27 22:35:03
+/* Smarty version 3.1.30, created on 2022-10-30 12:51:29
   from "C:\xampp\htdocs\AplikacjeSieciowe\php_07_ochrona_dostepu\app\views\tpl\messages.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_635aeb775539c9_97980058',
+  'unifunc' => 'content_635e654150a356_02019451',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_635aeb775539c9_97980058 (Smarty_Internal_Template $_smarty_tpl) {
+function content_635e654150a356_02019451 (Smarty_Internal_Template $_smarty_tpl) {
 if ($_smarty_tpl->tpl_vars['msgs']->value->isError()) {?>
     <div class="result err">
         <h4>Ponownie wypełnij formularz</h4>
